@@ -11,7 +11,6 @@ import java.util.HashMap;
 
 /** Class to override default cached values. */
 public class BraveCachedFlag extends CachedFlag {
-    private static final String ANDROID_OPEN_INCOGNITO_AS_WINDOW = "AndroidOpenIncognitoAsWindow";
     private static final String CLEAR_BROWSING_DATA_ANDROID_SURVEY =
             "ClearBrowsingDataAndroidSurvey";
     private static final String FEED_CONTAINMENT = "FeedContainment";
@@ -28,7 +27,6 @@ public class BraveCachedFlag extends CachedFlag {
 
     static {
         sFlags = new HashMap<String, Boolean>();
-        sFlags.put(ANDROID_OPEN_INCOGNITO_AS_WINDOW, false);
         sFlags.put(AUTOFILL_ENABLE_LOYALTY_CARDS_FILLING, false);
         sFlags.put(CLEAR_BROWSING_DATA_ANDROID_SURVEY, false);
         sFlags.put(FEED_CONTAINMENT, false);
