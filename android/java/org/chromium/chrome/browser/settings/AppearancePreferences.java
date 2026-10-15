@@ -351,6 +351,10 @@ public class AppearancePreferences extends AppearanceSettingsFragment
                                         if (preference instanceof ChromeSwitchPreference) {
                                             ((ChromeSwitchPreference) preference).setChecked(false);
                                             BraveMultiWindowUtils.updateEnableMultiWindows(false);
+                                            if (BraveMultiWindowUtils
+                                                    .isIncognitoAsWindowSupported()) {
+                                                BraveRelaunchUtils.askForRelaunch(getActivity());
+                                            }
                                         }
                                     }
                                 }
@@ -365,6 +369,7 @@ public class AppearancePreferences extends AppearanceSettingsFragment
                 }
             }
             BraveMultiWindowUtils.updateEnableMultiWindows((boolean) newValue);
+            shouldRelaunch = BraveMultiWindowUtils.isIncognitoAsWindowSupported();
         } else if (PREF_SHOW_UNDO_WHEN_TABS_CLOSED.equals(key)) {
             ChromeSharedPreferences.getInstance()
                     .writeBoolean(
