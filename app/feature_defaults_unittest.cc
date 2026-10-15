@@ -243,7 +243,6 @@ TEST(FeatureDefaultsTest, DisabledFeatures) {
       &features::kWebIdentityDigitalCredentialsCreation,
       &features::kWebOTP,
 #if BUILDFLAG(IS_ANDROID)
-      &feed::kAndroidOpenIncognitoAsWindow,
       &feed::kFeedContainment,
       &feed::kInterestFeedV2,
 #endif
