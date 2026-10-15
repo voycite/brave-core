@@ -12,6 +12,8 @@ public class BraveMultiWindowUtilsClassAdapter extends BraveClassVisitor {
             "org/chromium/chrome/browser/multiwindow/MultiWindowUtils";
     static String sBraveMultiWindowUtilsClassName =
             "org/chromium/chrome/browser/multiwindow/BraveMultiWindowUtils";
+    static String sIncognitoUtilsClassName =
+            "org/chromium/chrome/browser/incognito/IncognitoUtils";
 
     public BraveMultiWindowUtilsClassAdapter(ClassVisitor visitor) {
         super(visitor);
@@ -35,6 +37,11 @@ public class BraveMultiWindowUtilsClassAdapter extends BraveClassVisitor {
         changeMethodOwner(
                 sMultiWindowUtilsClassName,
                 "isLinkNavigationToIncognitoWindowSupported",
+                sBraveMultiWindowUtilsClassName);
+
+        changeMethodOwner(
+                sIncognitoUtilsClassName,
+                "shouldOpenIncognitoAsWindow",
                 sBraveMultiWindowUtilsClassName);
     }
 }

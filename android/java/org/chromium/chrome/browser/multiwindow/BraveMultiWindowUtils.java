@@ -11,8 +11,10 @@ import android.content.Intent;
 import org.chromium.base.BravePreferenceKeys;
 import org.chromium.base.Log;
 import org.chromium.build.annotations.NullMarked;
+import org.chromium.build.annotations.Nullable;
 import org.chromium.chrome.browser.ChromeTabbedActivity;
 import org.chromium.chrome.browser.app.BraveActivity;
+import org.chromium.chrome.browser.incognito.IncognitoUtils;
 import org.chromium.chrome.browser.multiwindow.MultiInstanceManager.PersistedInstanceType;
 import org.chromium.chrome.browser.preferences.ChromeSharedPreferences;
 import org.chromium.chrome.browser.tabmodel.TabModelSelector;
@@ -24,6 +26,8 @@ import java.util.List;
 public class BraveMultiWindowUtils extends MultiWindowUtils {
 
     private static final String TAG = "MultiWindowUtils";
+
+    private static @Nullable Boolean sMultiWindowsEnabledAtStartup;
 
     public BraveMultiWindowUtils() {
         super();
@@ -62,6 +66,18 @@ public class BraveMultiWindowUtils extends MultiWindowUtils {
 
     public static boolean canEnterMultiWindowMode() {
         return shouldEnableMultiWindows() && MultiWindowUtils.canEnterMultiWindowMode();
+    }
+
+    // Read once, since window profile types and keyboard shortcuts are fixed at startup.
+    public static boolean shouldOpenIncognitoAsWindow() {
+        if (sMultiWindowsEnabledAtStartup == null) {
+            sMultiWindowsEnabledAtStartup = shouldEnableMultiWindows();
+        }
+        return sMultiWindowsEnabledAtStartup && IncognitoUtils.shouldOpenIncognitoAsWindow();
+    }
+
+    public static boolean isIncognitoAsWindowSupported() {
+        return IncognitoUtils.shouldOpenIncognitoAsWindow();
     }
 
     public static boolean shouldEnableMultiWindows() {
