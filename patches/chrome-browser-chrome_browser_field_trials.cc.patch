@@ -1,0 +1,22 @@
+diff --git a/chrome/browser/chrome_browser_field_trials.cc b/chrome/browser/chrome_browser_field_trials.cc
+index bb7f9dd0eb6269ff5f8e179c0b9b4cc28dd34c3c..b044acc07ee59093ec62b39596305dcfb9d96f2a 100644
+--- a/chrome/browser/chrome_browser_field_trials.cc
++++ b/chrome/browser/chrome_browser_field_trials.cc
+@@ -128,7 +128,7 @@ void ChromeBrowserFieldTrials::RegisterFeatureOverrides(
+   variations::FeatureOverrides feature_overrides(*feature_list);
+ 
+ #if BUILDFLAG(IS_ANDROID)
+-#if BUILDFLAG(IS_DESKTOP_ANDROID)
++  if (base::android::device_info::is_desktop()) {
+   // Nota bene: Anything here is expected to be short-lived, unless deemed too
+   // risky to launch to non-desktop platforms. New features being added here
+   // should be the exception, and not the norm. Instead, you should place the
+@@ -395,7 +395,7 @@ void ChromeBrowserFieldTrials::RegisterFeatureOverrides(
+   // LFF devices.
+   feature_overrides.EnableFeature(features::kAndroidDevToolsFrontend);
+ 
+-#endif  // BUILDFLAG(IS_DESKTOP_ANDROID)
++  }  // base::android::device_info::is_desktop()
+   // Desktop-first features which are past incubation should either end up here,
+   // or to a finch trial that enables it for all form factors.
+ #endif  // BUILDFLAG(IS_ANDROID)
