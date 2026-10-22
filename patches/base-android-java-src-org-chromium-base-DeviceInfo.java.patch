@@ -1,0 +1,14 @@
+diff --git a/base/android/java/src/org/chromium/base/DeviceInfo.java b/base/android/java/src/org/chromium/base/DeviceInfo.java
+index 66bf313f1c56ef91a929d46f3cafa47cbbae58ff..4108c19ca2d18cf97f3c2a9e08b4f0b93aed0952 100644
+--- a/base/android/java/src/org/chromium/base/DeviceInfo.java
++++ b/base/android/java/src/org/chromium/base/DeviceInfo.java
+@@ -521,8 +521,7 @@ public final class DeviceInfo {
+         mIDeviceInfo.isDesktop =
+                 (sIsDesktopForTesting != null)
+                         ? sIsDesktopForTesting
+-                        : (BuildConfig.IS_DESKTOP_ANDROID
+-                                        && (systemFeatures != null
++                        : ((systemFeatures != null
+                                                 ? systemFeatures.mHasPc
+                                                 : pm.hasSystemFeature(
+                                                         PackageManager.FEATURE_PC))) // nocheck
