@@ -1,0 +1,19 @@
+# Copyright (c) 2026 The Brave Authors. All rights reserved.
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this file,
+# You can obtain one at https://mozilla.org/MPL/2.0/.
+
+substitutions:
+  - description: |-
+      Apply upstream's desktop Android feature overrides on desktop devices at
+      runtime instead of only in `is_desktop_android` builds, so the fork keeps
+      tracking upstream's list. Google-only entries are disabled ahead of this
+      block in the chromium_src override.
+    regex:
+      pattern: '#if BUILDFLAG(IS_DESKTOP_ANDROID)'
+      replace: '  if (base::android::device_info::is_desktop()) {'
+
+  - description: Close the runtime check opened above.
+    regex:
+      pattern: '#endif  // BUILDFLAG(IS_DESKTOP_ANDROID)'
+      replace: '  }  // base::android::device_info::is_desktop()'
